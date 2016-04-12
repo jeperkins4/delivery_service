@@ -1,0 +1,9 @@
+.page-header
+  %h1
+    Edit Franchise
+    .pull-right
+      = link_to 'Show', franchise, class: 'btn btn-default'
+      = link_to t('back',to: "Franchises").html_safe, franchises_path, class: 'btn btn-default'
+= render 'form'
+
+

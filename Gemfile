@@ -6,7 +6,6 @@ ruby '2.3.0'
 gem 'rails', '>= 5.0.0.beta3', '< 5.1'
 # Use sqlite3 as the database for Active Record
 # Use Puma as the app server
-gem 'puma'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -15,6 +14,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+gem 'momentjs-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -47,17 +47,48 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'bootstrap-sass'
-gem 'devise'
+gem 'aasm'
+gem 'bootstrap-daterangepicker-rails'
+gem "bootstrap-sass"
+gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-timepicker-rails-addon', '~> 0.5.1'
+gem 'cancancan'
+gem 'chronic'
+gem 'cocoon'
+gem 'jquery-datatables-rails', :github => 'rweng/jquery-datatables-rails'
+gem 'decent_exposure', github: 'hashrocket/decent_exposure'
+gem 'devise', github: 'plataformatec/devise'
+gem 'factual-api'
+gem 'font-awesome-rails'
 gem 'figaro'
+gem 'underscore-rails'
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'google_directions'
+gem "kaminari"
 gem 'haml-rails'
 gem 'high_voltage', :github=>"thoughtbot/high_voltage"
+gem 'mail_view', github: 'basecamp/mail_view'
+gem 'money-rails'
 gem 'pg'
 gem 'puma'
+gem 'rolify'
 gem 'simple_form'
+gem 'country_select'
+
+#gem 'whenever', require: false
+#gem 'sidekiq', '3.5.4'
+#gem 'sidekiq-status'
+#gem 'sidekiq-failures'
+#gem 'sinatra'
+
+#gem 'rest-firebase'
+#gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+#gem 'sprockets'
 
 group :development do
   gem 'better_errors'
+  gem "binding_of_caller", ">= 0.7.2"
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
@@ -74,7 +105,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'factory_girl_rails'
+  gem 'fabrication'
   gem 'faker'
   gem 'rspec-rails'
   gem 'rubocop'

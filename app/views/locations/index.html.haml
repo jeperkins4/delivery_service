@@ -1,0 +1,8 @@
+.page-header
+  %h1
+    Locations
+    .pull-right
+      = link_to raw(t('new')), new_location_path, :class => 'btn btn-primary'
+%ul
+  - locations.each do |location|
+    %li= label(location).html_safe

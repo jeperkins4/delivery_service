@@ -1,0 +1,51 @@
+.page-header
+  %h1
+    = place.name
+    .pull-right
+      = link_to raw(t('edit')), [:edit, place], :class => 'btn btn-primary'
+      = link_to raw(t('back',to: "Places")), places_path, :class => 'btn btn-default'
+%p
+  = place.description
+.row
+  .col-md-9.tabbable
+    - if can?(:manage, Menu)
+      .pull-right
+        = link_to(t('add').html_safe, [:new, place, :menu], class: 'btn btn-primary')
+    %ul#menu_tabs.nav.nav-tabs{role: 'tablist'}
+      - place.menus.order(:position).each do |menu|
+        %li= link_to menu.name, "##{menu.name.downcase.gsub(' ','_')}", data: { toggle: 'tab' }
+    .tab-content
+      - place.menus.order(:position).each do |menu|
+        .tab-pane{id: menu.name.downcase.gsub(' ','_'), role: 'tabpanel' }
+          %p
+            .pull-right
+              - if can?(:manage, menu.items)
+                = link_to(t('item.add').html_safe, [:new, place, menu, :item], class: 'btn btn-primary')
+            %ul
+              - menu.items.each do |item|
+                %li
+                  = link_to([place, menu, item]) do |menu_item|
+                    .item= item.name
+                    .price= number_to_currency(item.price)
+
+  .col-md-3
+    %dl
+      %dt Street:
+      %dd= address(place).html_safe
+      %dt Hours:
+      %dd
+        - place.hours.each do |day, hours|
+          = [day.titleize, hours.join(' - ')].join(': ')
+          %br
+
+      %dt Phone:
+      %dd= number_to_phone(place.phone)
+      %dt Email:
+      %dd= place.email
+      %dt Website:
+      %dd= place.website
+      %dt Category:
+      %dd= place.category.join(', ')
+      %dt Neighborhood:
+      %dd= place.neighborhood
+

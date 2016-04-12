@@ -1,0 +1,26 @@
+.page-header
+  %h1
+    Menus
+    .pull-right
+      = link_to t('new').html_safe, [:new, place, :menu], :class => 'btn btn-primary'
+
+%table#menus.table.table-bordered.table-striped.dataTable{:data => {:source => place_menus_url(place_id: place.id, :format => 'json')}}
+  %thead
+    %tr
+      %th Place
+      %th Name
+      %th Position
+      %th Category
+      %th Hours
+      %th
+  %tbody
+    - menus.each do |menu|
+      %tr
+        %td= menu.place.try(:name)
+        %td= menu.name
+        %td= menu.position
+        %td= menu.category
+        %td= menu.hours
+        %td
+          = link_to raw(t('edit')), [:edit, place, menu], :class => 'btn btn-default btn-xs'
+          = link_to raw(t('destroy')), [place, menu], :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'

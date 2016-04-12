@@ -1,0 +1,42 @@
+.page-header
+  %h1
+    Orders
+    .pull-right
+      = link_to raw(t('new')), new_order_path, :class => 'btn btn-primary'
+
+%table#orders.table.table-bordered.table-striped.dataTable{:data => {:source => orders_url(:format => 'json')}}
+  %thead
+    %tr
+    %th User
+    %th Place
+    %th Status
+    %th Placed at
+    %th Pickup at
+    %th Delivered at
+    %th Rating
+    %th Street
+    %th City
+    %th State
+    %th Postal code
+    %th Phone
+    %th Driver
+    %th
+  %tbody
+    - orders.each do |order|
+      %tr
+      %td= order.user
+      %td= order.place
+      %td= order.status
+      %td= order.placed_at
+      %td= order.pickup_at
+      %td= order.delivered_at
+      %td= order.rating
+      %td= order.street
+      %td= order.city
+      %td= order.state
+      %td= order.postal_code
+      %td= order.phone
+      %td= order.driver
+      %td
+        = link_to raw(t('edit')), edit_order_path(order), :class => 'btn btn-small'
+        = link_to raw(t('destroy')), order, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-small btn-danger'

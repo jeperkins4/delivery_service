@@ -1,0 +1,26 @@
+.page-header
+  %h1
+    Location
+    .pull-right
+      = link_to raw(t('edit')), [:edit, location], :class => 'btn btn-primary'
+      = link_to raw(t('back',to: "Locations")), locations_path, :class => 'btn btn-default'
+%dl
+  %dt Name:
+  %dd= location.name
+  %dt Description:
+  %dd= location.description
+  %dt Street:
+  %dd= location.street
+  %dt City:
+  %dd= location.city
+  %dt State:
+  %dd= location.state
+  %dt Country:
+  %dd= location.country
+  %dt Postal code:
+  %dd= location.postal_code
+  %dt Latitude:
+  %dd= location.latitude
+  %dt Longitude:
+  %dd= location.longitude
+

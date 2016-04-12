@@ -1,0 +1,12 @@
+= simple_form_for([place, menu, item]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :menu, collection: place.menus
+    = f.input :name
+    = f.input :description
+    = f.input :position
+    = f.input :price, as: :currency
+
+  .form-actions
+    = f.button :submit

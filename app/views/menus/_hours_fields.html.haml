@@ -1,0 +1,5 @@
+%tr.nested-fields
+  %td= f.input :day_of_week, collection: APP[:days_of_week]
+  %td= f.input :start_time, as: :string, class: 'timepicker'
+  %td= f.input :end_time, as: :string, class: 'timepicker'
+  %td=# link_to_remove_association(t("remove_file").html_safe, f, :class => 'btn btn-xs btn-danger')

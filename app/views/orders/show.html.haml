@@ -1,0 +1,34 @@
+.page-header
+  %h1
+    Order
+    .pull-right
+      = link_to raw(t('edit')), [:edit, order], :class => 'btn btn-primary'
+      = link_to raw(t('back',to: "Orders")), orders_path, :class => 'btn btn-default'
+%dl
+  %dt User:
+  %dd= order.user
+  %dt Place:
+  %dd= order.place
+  %dt Status:
+  %dd= order.status
+  %dt Placed at:
+  %dd= order.placed_at
+  %dt Pickup at:
+  %dd= order.pickup_at
+  %dt Delivered at:
+  %dd= order.delivered_at
+  %dt Rating:
+  %dd= order.rating
+  %dt Street:
+  %dd= order.street
+  %dt City:
+  %dd= order.city
+  %dt State:
+  %dd= order.state
+  %dt Postal code:
+  %dd= order.postal_code
+  %dt Phone:
+  %dd= order.phone
+  %dt Driver:
+  %dd= order.driver
+

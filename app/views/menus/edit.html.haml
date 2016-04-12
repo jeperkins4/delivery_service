@@ -1,0 +1,9 @@
+.page-header
+  %h1
+    Edit Menu
+    .pull-right
+      = link_to 'Show', [place, menu], class: 'btn btn-default'
+      = link_to t('back',to: "Menus").html_safe, [place, :menus], class: 'btn btn-default'
+= render 'form'
+
+

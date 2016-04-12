@@ -1,0 +1,9 @@
+.page-header
+  %h1
+    Edit Driver
+    .pull-right
+      = link_to 'Show', driver, class: 'btn'
+      = link_to t('back',to: "Drivers").html_safe, drivers_path, class: 'btn'
+= render 'form'
+
+

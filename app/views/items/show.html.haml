@@ -1,0 +1,15 @@
+.page-header
+  %h1
+    = item.name
+    .pull-right
+      = link_to t('order').html_safe, [:order, place, menu, item], :class => 'btn btn-success'
+      = link_to raw(t('edit')), [:edit, place, menu, item], :class => 'btn btn-primary'
+      = link_to raw(t('back',to: "Items")), [place, menu, :items], :class => 'btn btn-default'
+%dl
+  %dt Description:
+  %dd= item.description
+  %dt Menu:
+  %dd= item.menu.try(:name)
+  %dt Price:
+  %dd= number_to_currency(item.price)
+

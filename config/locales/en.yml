@@ -21,3 +21,36 @@
 
 en:
   hello: "Hello world"
+  time:
+    formats:
+      default: "%m/%d/%Y %H:%M"
+      day: "%B %e, %Y"
+      full_day: "%B %e, %Y"
+      short: "%B %e, %Y %l:%M %p"
+      long: "%B %e, %Y %l:%M %p %Z"
+      wrapped: "%B %e, %Y<br/> %l:%M %p %Z"
+      picker: "%m/%d/%Y %H:%M %p"
+      hour: "%H:%M %p"
+      friendly: "%A, %B %e"
+      report: "%m/%d/%Y"
+  date:
+    formats:
+      default: "%m/%d/%Y"
+      report: "%m/%d/%Y"
+      short: "%m/%d/%Y"
+      day: "%B %e, %Y"
+      full_day: "%A, %B %d, %Y"
+      report: '%m/%d/%Y'
+  home: "<i class='fa fa-car'></i> Doorstep Delivery"
+  new: "<i class='fa fa-plus-square'></i> New %{model_name}"
+  edit: "<i class='fa fa-edit'></i> Edit"
+  resend: "<i class='fa fa-envelope-o'></i> Resend Certificate"
+  destroy: "<i class='fa fa-trash-o'></i> Delete"
+  back: "<i class='fa fa-arrow-circle-left'></i> Back to %{to}"
+  login: "<i class='fa fa-power-on'></i> Sign In"
+  logout: "<i class='fa fa-power-off fa-rotate-90'></i> Sign Out"
+  print: "<i class='fa fa-print'></i> Print"
+  sync: "<i class='fa fa-refresh'></i> Sync"
+  search: "<i class='fa fa-search'></i> Search"
+  location: "<i class='fa fa-map-marker'></i>"
+  down: "<i class='fa fa-chevron-circle-down'></i>"

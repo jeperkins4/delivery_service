@@ -1,0 +1,25 @@
+.page-header
+  %h1
+    = link_to(place.name, place)
+    %small Menu Items
+    .pull-right
+      =# link_to raw(t('new')), [:new, place, menu, :items], :class => 'btn btn-primary'
+
+%table#items.table.table-bordered.table-striped.dataTable{:data => {:source => place_menu_items_url(place_id: place.id, menu_id: menu.id, :format => 'json')}}
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th Menu
+      %th Price
+      %th
+  %tbody
+    - items.each do |item|
+      %tr
+        %td= link_to(item.name, [place, menu, item])
+        %td= item.description
+        %td= item.menu.try(:name)
+        %td= number_to_currency(item.price)
+        %td
+          = link_to raw(t('edit')), [:edit, place, menu, item], :class => 'btn btn-xs btn-default'
+          = link_to raw(t('destroy')), [place, menu, item], :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'

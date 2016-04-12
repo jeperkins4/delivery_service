@@ -1,0 +1,22 @@
+.page-header
+  %h1
+    Drivers
+    .pull-right
+      = link_to raw(t('new')), new_driver_path, :class => 'btn btn-primary'
+
+%table#drivers.table.table-bordered.table-striped.dataTable{:data => {:source => drivers_url(:format => 'json')}}
+  %thead
+    %tr
+    %th User
+    %th License
+    %th State
+    %th
+  %tbody
+    - drivers.each do |driver|
+      %tr
+      %td= driver.user
+      %td= driver.license
+      %td= driver.state
+      %td
+        = link_to raw(t('edit')), edit_driver_path(driver), :class => 'btn btn-small'
+        = link_to raw(t('destroy')), driver, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-small btn-danger'

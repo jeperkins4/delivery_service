@@ -1,0 +1,14 @@
+.page-header
+  %h1
+    Driver
+    .pull-right
+      = link_to raw(t('edit')), [:edit, driver], :class => 'btn btn-primary'
+      = link_to raw(t('back',to: "Drivers")), drivers_path, :class => 'btn btn-default'
+%dl
+  %dt User:
+  %dd= driver.user
+  %dt License:
+  %dd= driver.license
+  %dt State:
+  %dd= driver.state
+

@@ -1,0 +1,70 @@
+-# navigation styled for Bootstrap 3.0
+%nav.navbar.navbar-inverse.navbar-fixed-top
+  .container
+    .navbar-header
+      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to t('home').html_safe, root_path, class: 'navbar-brand'
+    .collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        - if can? :manage, User
+          = render 'layouts/navigation_links'
+      %ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          %li= link_to t('my_account').html_safe, edit_user_registration_path
+          %li= link_to t('logout').html_safe, destroy_user_session_path, :method=>'delete'
+        - elsif !['directories'].include?(controller_name)
+          %li= link_to t('sign_up').html_safe, new_registration_path(resource_name)
+          %li
+            = link_to t('login').html_safe, '#new_session', :data => {:toggle => 'modal', :target => '#new_session'}
+#new_session.modal.fade
+  .modal-dialog
+    .modal-content
+      = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-horizontal'}, role: 'form') do |f|
+        .modal-header
+          %button.close(data-dismiss='modal' aria-hidden='true')
+            x
+          %h4.modal-title= t('login').html_safe
+        .modal-body
+          .row
+            .col-md-1
+            .col-md-10
+              = f.input :email, :placeholder => 'Email', :autofocus => true
+              = f.input :password, :placeholder => 'Password'
+            .col-md-1
+        .modal-footer
+          = f.button :submit, "Sign in", :class => 'btn btn-primary btn-block'
+          - if devise_mapping.recoverable? && controller_name != 'passwords'
+            %br/
+            = link_to "Forgot your password?", new_password_path(resource_name), class: 'btn btn-default btn-block'
+          - if devise_mapping.confirmable? && controller_name != 'confirmations'
+            %br/
+            = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: 'btn btn-default btn-block'
+- if user_signed_in?
+  #attestation.modal.fade
+    .modal-dialog
+      .modal-content
+        = simple_form_for(resource, as: resource_name, url: accept_user_path(current_user), html: { method: :put }) do |f|
+          .modal-header
+            %button.close(data-dismiss='modal' aria-hidden='true')
+              x
+            %h4.modal-title= t('attestation').html_safe
+          .modal-body
+            %p By clicking the 'Agree' button below, I acknowledge I will be accessing confidential health-related information and agree to comply with all applicable federal and state laws.
+            %p I acknowledge it is imperative that this information not be disclosed to any unauthorized individuals to maintain the privacy and integrity of information about health insurance beneficiaries.
+            %p I understand that violation of confidentiality statutes, rules, or policies and procedures may lead to disciplinary action and/or criminal prosecution.
+          .modal-footer
+            .row
+              .col-md-9
+                = f.input_field :accepted_terms, as: :boolean
+                %label.boolean.optional{for: 'user_accepted_terms'}
+                  I attest to the following terms and conditions
+              .col-md-3
+            = f.button :submit, "Agree", :class => 'btn btn-primary btn-block'
+            %button.btn.btn-default.btn-block{data: { dismiss: 'modal'}, aria: { hidden: true }} Close
+  %script{type: 'text/javascript'}
+    - if !current_user.accepted_terms
+      $('#attestation').modal('show');

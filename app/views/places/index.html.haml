@@ -1,0 +1,17 @@
+.page-header
+  %h1
+    Places
+    - if can? :manage, Place
+      .pull-right
+        = link_to raw(t('new', model_name: 'Places')), new_place_path, :class => 'btn btn-primary'
+
+%table#places.table.table-striped.dataTable{:data => {:source => places_url(:format => 'json')}}
+  %thead
+    %tr
+      %th Name
+      %th Cuisine
+      %th Hours
+      %th Fee
+      %th Minimum Order
+      %th Quote Time
+  %tbody

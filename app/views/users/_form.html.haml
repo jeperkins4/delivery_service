@@ -1,0 +1,9 @@
+= simple_form_for(user) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :franchise_id, collection: Franchise.order(:name)
+    = f.input :role_ids, :collection => Role.order(:name), :as => :check_boxes, :label_method => lambda {|t| t.name.titleize}, :label => 'Roles', wrapper: :vertical_radio_and_checkboxes, checked: user.role_ids #:item_wrapper_class => 'controls col-md-7'
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,22 @@
+= simple_form_for(place) do |f|
+  = f.error_notification
+
+  .form-inputs.row
+    .col-md-6
+      = f.input :name
+      = f.input :description
+      = f.input :street
+      = f.input :city
+      = f.input :state
+      = f.input :country
+      = f.input :postal_code
+    .col-md-6
+      = f.input :hours, as: :check_boxes, collection: APP[:place][:hours]
+      = f.input :phone
+      = f.input :email
+      = f.input :website
+      = f.input :category, as: :check_boxes, collection: APP[:menu][:categories]
+      = f.input :neighborhood
+
+  .form-actions
+    = f.button :submit

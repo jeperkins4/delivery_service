@@ -1,0 +1,12 @@
+.page-header
+  %h1
+    Franchise
+    .pull-right
+      = link_to raw(t('edit')), [:edit, franchise], :class => 'btn btn-primary'
+      = link_to raw(t('back',to: "Franchises")), franchises_path, :class => 'btn btn-default'
+%dl
+  %dt Name:
+  %dd= franchise.name
+  %dt Merchant key:
+  %dd= franchise.merchant_key
+

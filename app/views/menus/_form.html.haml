@@ -1,0 +1,18 @@
+= simple_form_for([place, menu]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.hidden_field :place_id, value: place.id
+    = f.input :name
+    = f.input :description
+    = f.input :position
+    = f.input :category, as: :check_boxes, collection: APP[:menu][:categories]
+    #hours
+      %table
+        = simple_fields_for :hours do |hours|
+          = render 'hours_fields', :f => hours
+      %br
+      .pull-right
+        =# link_to_add_association t('new', model_name: 'Hours').html_safe, f, :hours, :class => 'btn btn-default'
+  .form-actions
+    = f.button :submit

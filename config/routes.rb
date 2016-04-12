@@ -1,7 +1,22 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :franchises
+  resources :orders
+  resources :drivers
+  resources :places do
+    resources :menus do
+      resources :items do
+        member do
+          put :order
+        end
+      end
+    end
+  end
+  resources :locations
 
   # Serve websocket cable requests in-process
   # mount ActionCable.server => '/cable'
+
+  root to: 'places#index'
+  devise_for :users
+  resources :users
 end

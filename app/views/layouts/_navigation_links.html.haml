@@ -1,0 +1,13 @@
+- if user_signed_in?
+  %li.dropdown
+    = link_to raw("Administration <b class='caret'></b>"), "#", :class => "dropdown-toggle nopjax", 'data-toggle' => 'dropdown'
+    %ul.dropdown-menu
+      - if can?(:manage, User)
+        %li= link_to 'Users', users_path
+      - if can?(:manage, Place)
+        %li= link_to 'Places', places_path
+      - if can?(:manage, Franchise)
+        %li= link_to 'Franchises', franchises_path
+      - if can?(:manage, User)
+        %li.divider
+        %li=# link_to 'History', changes_path
