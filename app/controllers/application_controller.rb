@@ -35,6 +35,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_location
+    return if cookies[:lat_lng].nil?
     coords = cookies[:lat_lng].split('|')
     nearby_franchises = Franchise.near(coords, 10)
     current_franchise = nearby_franchises.first unless nearby_franchises.empty?
