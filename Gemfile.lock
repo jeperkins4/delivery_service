@@ -346,6 +346,8 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    sendgrid (1.2.4)
+      json
     sexp_processor (4.7.0)
     shellany (0.0.1)
     simple_form (3.2.1)
@@ -457,6 +459,7 @@ DEPENDENCIES
   rubocop
   sass-rails (~> 5.0)
   selenium-webdriver
+  sendgrid
   simple_form
   spring
   spring-commands-rspec

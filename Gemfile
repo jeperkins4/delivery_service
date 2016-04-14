@@ -77,6 +77,7 @@ gem 'puma'
 gem 'rolify'
 gem 'simple_form'
 gem 'country_select'
+gem 'sendgrid'
 
 #gem 'whenever', require: false
 #gem 'sidekiq', '3.5.4'
