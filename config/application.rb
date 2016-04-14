@@ -36,5 +36,6 @@ module Doorstep
                                 #{config.root}/lib)
 
 
+    config.assets.precompile += %w(welcome.coffee pdf.css)
   end
 end

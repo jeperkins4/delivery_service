@@ -32,7 +32,7 @@ defaults: &defaults
     secret: QRf33q1xElwk1ddU4hkPl6yM3oF0MrOlnY31zMHn
   google:
     maps:
-      api_key: replace_with_correct_key
+      api_key: AIzaSyBKXJ5t7Q9Wmo5AyF6CVfNCcwkdmozBVh4
   menu:
     categories:
       - American

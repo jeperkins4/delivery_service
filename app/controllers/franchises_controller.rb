@@ -1,9 +1,11 @@
 class FranchisesController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:set_location]
   respond_to :html, :json
 
   expose(:franchises) {  Franchise.all }
   expose(:franchise, attributes: :franchise_params)
+
+  autocomplete :franchise, :location
 
   def index
     respond_to do |format|
@@ -12,8 +14,6 @@ class FranchisesController < ApplicationController
     end
   end
 
-  # POST /franchises
-  # POST /franchises.json
   def create
     respond_to do |format|
       if franchise.save
@@ -26,8 +26,6 @@ class FranchisesController < ApplicationController
     end
   end
 
-  # PUT /franchises/1
-  # PUT /franchises/1.json
   def update
     respond_to do |format|
       if franchise.update(franchise_params)
@@ -51,9 +49,12 @@ class FranchisesController < ApplicationController
     end
   end
 
+  def set_location
+  end
+
   private
     # Only allow a trusted parameter "white list" through.
     def franchise_params
-      params.require(:franchise).permit(:name, :merchant_key)
+      params.require(:franchise).permit(:name, :merchant_key, :location, :latitude, :longitude)
     end
 end

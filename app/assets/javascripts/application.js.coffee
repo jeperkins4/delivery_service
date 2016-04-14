@@ -3,6 +3,8 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require bootstrap-timepicker
+//= require bootstrap3-typeahead.min
+//= require bootstrap3-autocomplete-input.min
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require dataTables/extras/dataTables.tableTools
@@ -14,6 +16,16 @@
 //= require gmaps/google
 //= require_tree .
 //= require_self
+
+getGeoLocation = ->
+  navigator.geolocation.getCurrentPosition setGeoCookie
+  return
+
+setGeoCookie = (position) ->
+  cookie_val = position.coords.latitude + '|' + position.coords.longitude
+  document.cookie = 'lat_lng=' + escape(cookie_val)
+  console.log cookie_val
+  return
 
 $ ->
   $('.dropdown-toggle').dropdown()
@@ -40,3 +52,7 @@ $ ->
 
   $.ajaxSetup headers:
     "X-CSRF-Token": $("meta[name=\"csrf-token\"]").attr("content")
+
+  getGeoLocation()
+  $('#geocode_location').click ->
+    getGeoLocation()

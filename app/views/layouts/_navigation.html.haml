@@ -9,18 +9,18 @@
         %span.icon-bar
       = link_to t('home').html_safe, root_path, class: 'navbar-brand'
     .collapse.navbar-collapse
-      %form.navbar-form.navbar-input-group.navbar-left{id: 'form-search-location', role: 'search', action: '/users/location', method: 'post', novalidate: 'novalidate', accept: {charset: 'UTF-8'} }
+      .navbar-form.navbar-input-group.navbar-left
         .input-group
-          %button.btn.btn-danger
+          %button#geocode_location.btn.btn-danger
             = t('location').html_safe
           .form-group
-            %input#name.form-control{type: 'text', placeholder: 'Location', name: 'users[location]'}
+            %input#geolocation_name.form-control{type: 'text', placeholder: 'Location', name: 'users[location]',
+              value: current_location}
             %input{type: 'hidden', name: 'authenticity_token', value: "#{form_authenticity_token}"}
-      %form.navbar-form.navbar-input-group.navbar-left{id: 'form-search-places', role: 'search', action: '/places/search', method: 'post', novalidate: 'novalidate', accept: {charset: 'UTF-8'} }
+      = simple_form_for(:places, html: { class: 'navbar-form navbar-input-group navbar-left' } ) do |f|
         .form-group
-          %input#name.form-control{type: 'text', placeholder: 'Restaurant', name: 'places[name]'}
-          %input{type: 'hidden', name: 'authenticity_token', value: "#{form_authenticity_token}"}
-        %button.btn.btn-danger{type:'submit', id: 'btn-search-place'}
+          = f.input :place, as: :autocomplete, source_query: autocomplete_place_name_places_url, placeholder: 'Restaurants'
+        = f.button(:button, class: 'btn btn-danger') do
           = t('search').html_safe
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?

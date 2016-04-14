@@ -7,14 +7,16 @@
 %table#franchises.table.table-bordered.table-striped.dataTable{:data => {:source => franchises_url(:format => 'json')}}
   %thead
     %tr
-    %th Name
-    %th Merchant key
-    %th
+      %th Name
+      %th Location
+      %th Merchant key
+      %th
   %tbody
     - franchises.each do |franchise|
       %tr
-      %td= franchise.name
-      %td= franchise.merchant_key
-      %td
-        = link_to raw(t('edit')), edit_franchise_path(franchise), :class => 'btn btn-xs btn-default'
-        = link_to raw(t('destroy')), franchise, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'
+        %td= franchise.name
+        %td= franchise.location
+        %td= franchise.merchant_key
+        %td
+          = link_to raw(t('edit')), edit_franchise_path(franchise), :class => 'btn btn-xs btn-default'
+          = link_to raw(t('destroy')), franchise, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'

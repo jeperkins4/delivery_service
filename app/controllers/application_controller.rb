@@ -5,15 +5,41 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  helper_method :current_franchise, :current_location
   before_filter :cors_preflight_check
   after_filter :cors_set_access_control_headers
+
+  autocomplete :place, :name
+
+  expose(:franchises) { Franchise.order(:name) }
 
   decent_configuration do
     strategy DecentExposure::StrongParametersStrategy
   end
 
+  def current_franchise
+    if user_signed_in?
+      @current_franchise ||= Franchise.find(session[:current_franchise_id])
+    end
+    return @current_franchise
+  end
+
+  def current_franchise=(franchise)
+    if user_signed_in?
+      session[:current_franchise_id] = franchise.try(:id)
+    end
+  end
+
   def set_timezone
     Time.use_zone(current_user.time_zone) if current_user
+  end
+
+  def current_location
+    coords = cookies[:lat_lng].split('|')
+    nearby_franchises = Franchise.near(coords, 10)
+    current_franchise = nearby_franchises.first unless nearby_franchises.empty?
+    info = Geocoder.search(coords.map(&:to_f))
+    info.first.data['formatted_address']
   end
 
   rescue_from CanCan::AccessDenied do |exception|

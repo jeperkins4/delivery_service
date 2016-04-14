@@ -52,6 +52,7 @@ gem 'bootstrap-daterangepicker-rails'
 gem "bootstrap-sass"
 gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-timepicker-rails-addon', '~> 0.5.1'
+gem 'bootstrap3_autocomplete_input'
 gem 'cancancan'
 gem 'chronic'
 gem 'cocoon'
@@ -65,6 +66,7 @@ gem 'underscore-rails'
 gem 'geocoder'
 gem 'gmaps4rails'
 gem 'google_directions'
+gem 'google_places'
 gem "kaminari"
 gem 'haml-rails'
 gem 'high_voltage', :github=>"thoughtbot/high_voltage"

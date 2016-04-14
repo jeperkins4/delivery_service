@@ -2,8 +2,10 @@ class PlacesController < ApplicationController
   before_filter :authenticate_user!
   respond_to :html, :json
 
-  expose(:places) {  Place.all }
+  expose(:places) { current_franchise.nil? ? Place.order(:name) : current_franchise.places.order(:name) }
   expose(:place, attributes: :place_params)
+
+  autocomplete :place, :name
 
   def index
     respond_to do |format|

@@ -1,0 +1,5 @@
+%script{:src => "//maps.google.com/maps/api/js?v=3.23&&libraries=geometry,visualization", :type => 'text/javascript'}
+%script{:src => "//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js", :type => 'text/javascript'}
+.row
+  .col-md-12.map-container
+    #map{:data => {:franchise => @hash.to_json}}

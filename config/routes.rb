@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  resources :franchises
+  resources :franchises do
+    get :autocomplete_franchise_location, on: :collection
+  end
   resources :orders
   resources :drivers
   resources :places do
+    get :autocomplete_place_name, on: :collection
     resources :menus do
       resources :items do
         member do
@@ -11,12 +14,11 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :locations
 
   # Serve websocket cable requests in-process
   # mount ActionCable.server => '/cable'
 
-  root to: 'places#index'
+  root to: 'welcome#index'
   devise_for :users
   resources :users
 end
