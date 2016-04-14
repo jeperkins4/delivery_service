@@ -15,7 +15,7 @@ namespace :factual do
                                       street: row['address'],
                                       city: row['locality'],
                                       factual_key: row['factual_id'])
-      place.franchise_id = franchise.id
+      place.franchise_id = franchise.try(:id)
       place.state = row['region']
       place.postal_code = row['postcode']
       place.latitude = row['latitude']
