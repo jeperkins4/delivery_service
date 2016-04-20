@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413050755) do
+ActiveRecord::Schema.define(version: 20160415131718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,10 +40,12 @@ ActiveRecord::Schema.define(version: 20160413050755) do
     t.integer  "menu_id"
     t.string   "name"
     t.string   "description"
-    t.money    "price",       scale: 2
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.money    "price",               scale: 2
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "position"
+    t.integer  "estimated_prep_time"
+    t.integer  "actual_prep_time"
   end
 
   add_index "items", ["menu_id"], name: "index_items_on_menu_id", using: :btree
@@ -100,10 +102,12 @@ ActiveRecord::Schema.define(version: 20160413050755) do
     t.string   "factual_key"
     t.text     "category"
     t.string   "neighborhood"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "position"
     t.integer  "franchise_id"
+    t.integer  "estimated_prep_time"
+    t.integer  "actual_prep_time"
   end
 
   add_index "places", ["franchise_id"], name: "index_places_on_franchise_id", using: :btree

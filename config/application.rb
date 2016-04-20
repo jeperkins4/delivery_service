@@ -26,16 +26,11 @@ module Doorstep
     end
 
     config.autoload_paths += %W(#{config.root}/app/datatables
-                                #{config.root}/app/decorators
                                 #{config.root}/app/inputs
-                                #{config.root}/app/reports
-                                #{config.root}/app/helpers
-                                #{config.root}/app/sweepers
                                 #{config.root}/app/services
-                                #{config.root}/app/uploaders
                                 #{config.root}/lib)
 
 
-    config.assets.precompile += %w(welcome.coffee pdf.css)
+    #config.assets.precompile += %w(welcome.coffee pdf.css cable.coffee channels/place.coffee)
   end
 end

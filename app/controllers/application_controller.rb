@@ -18,16 +18,19 @@ class ApplicationController < ActionController::Base
   end
 
   def current_franchise
-    if user_signed_in?
+    return if cookies[:lat_lng].nil?
+    if session[:current_franchise_id].nil?
+      coords = cookies[:lat_lng].split('|')
+      nearby_franchises = Franchise.near(coords, 10)
+      @current_franchise = nearby_franchises.first unless nearby_franchises.empty?
+    else
       @current_franchise ||= Franchise.find(session[:current_franchise_id])
     end
     return @current_franchise
   end
 
   def current_franchise=(franchise)
-    if user_signed_in?
-      session[:current_franchise_id] = franchise.try(:id)
-    end
+    session[:current_franchise_id] = franchise.try(:id)
   end
 
   def set_timezone
@@ -36,11 +39,11 @@ class ApplicationController < ActionController::Base
 
   def current_location
     return if cookies[:lat_lng].nil?
-    coords = cookies[:lat_lng].split('|')
-    nearby_franchises = Franchise.near(coords, 10)
-    current_franchise = nearby_franchises.first unless nearby_franchises.empty?
-    info = Geocoder.search(coords.map(&:to_f))
-    info.first.data['formatted_address']
+    Rails.cache.fetch("current_location_#{cookies[:lat_lng]}", expires_in: 1.hour) do
+      coords = cookies[:lat_lng].split('|')
+      @info ||= Geocoder.search(coords.map(&:to_f))
+      @info.first.data['formatted_address']
+    end
   end
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -53,9 +56,9 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:username, :email, :password, :password_confirmation) }
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:time_zone, :name, :email, :phone, :password, :password_confirmation) }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:time_zone, :name, :email, :franchise_id, :phone, :password, :password_confirmation, :current_password) }
+    devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(:username, :email, :password, :password_confirmation) }
+    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:time_zone, :name, :email, :phone, :password, :password_confirmation) }
+    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:time_zone, :name, :email, :franchise_id, :phone, :password, :password_confirmation, :current_password) }
   end
 
   # For all responses in this controller, return the CORS access control headers.

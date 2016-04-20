@@ -1,5 +1,5 @@
 class PlacesDatatable < BaseDatatable
-  delegate :current_user, :place_to_label, :categorize, :display_hours, :edit_place_path, to: :@view
+  delegate :current_user, :current_location, :place_to_label, :categorize, :display_hours, :cookies, :edit_place_path, to: :@view
 
   def as_json(options = {})
     {
@@ -19,7 +19,8 @@ private
         display_hours(place),
         nil,
         nil,
-        nil
+        place.distance(current_location),
+        content_tag(:div, place.distance_in_time(current_location), id: "place_#{place.id}_quote_time")
       ]
     end
   end
@@ -39,11 +40,16 @@ private
   end
 
   def columns
-    %w[places.name places.category places.hours places.id places.street places.city places.state places.postal_code]
+    %w[places.name places.category places.hours places.id places.street places.city places.state places.postal_code places.latitude
+    places.longitude places.estimated_prep_time places.actual_prep_time]
   end
 
   def exceptions
     ['places.id']
+  end
+
+  def origin
+    cookies[:lat_lng].split('|').map(&:to_f)
   end
 
 end

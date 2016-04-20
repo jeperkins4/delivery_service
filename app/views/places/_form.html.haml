@@ -17,6 +17,9 @@
       = f.input :website
       = f.input :category, as: :check_boxes, collection: APP[:menu][:categories]
       = f.input :neighborhood
+  .form-inputs.row
+    .col-md-4
+      = f.input :estimated_prep_time, hint: 'In Minutes'
 
   .form-actions
     = f.button :submit
