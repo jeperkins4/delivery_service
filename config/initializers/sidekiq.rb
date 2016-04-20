@@ -8,7 +8,7 @@ Sidekiq.configure_client do |config|
     chain.add Sidekiq::Status::ClientMiddleware
   end
   redis_url = ENV['REDISTOGO_URL'] || 'redis://localhost:6379/2'
-  config.redis = { url: redis_url }
+  config.redis = { url: redis_url, size: 5 }
 end
 
 Sidekiq.configure_server do |config|
@@ -20,5 +20,5 @@ Sidekiq.configure_server do |config|
     chain.add Sidekiq::Status::ClientMiddleware
   end
   redis_url = ENV['REDISTOGO_URL'] || 'redis://localhost:6379/2'
-  config.redis = { url: redis_url }
+  config.redis = { url: redis_url, size: 20 }
 end
