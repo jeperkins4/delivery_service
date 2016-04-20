@@ -20,11 +20,13 @@ class Place < ApplicationRecord
   end
 
   def distance_in_time(origin)
+    return if origin.nil?
     prep_time = actual_prep_time.to_i || estimated_prep_time.to_i
     "#{directions(origin).drive_time_in_minutes + prep_time} minutes"
   end
 
   def distance(origin)
+    return if origin.nil?
     "#{directions(origin).distance_in_miles} miles"
   end
 
@@ -33,6 +35,7 @@ class Place < ApplicationRecord
   private
 
   def directions(origin)
+    return if origin.nil?
     Rails.cache.fetch("driving_directions_#{origin.gsub(',','').gsub(' ','_')}:#{address.gsub(',','').gsub(' ','_')}", expires_in: 1.hour) do
       GoogleDirections.new(origin, address)
     end

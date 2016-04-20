@@ -1,5 +1,5 @@
 class BaseDatatable
-  delegate :content_tag, :current_user, :params, :links, :html_safe, :h, :l, :localize, :t, :status_tag, :link_to_if, :button_to,
+  delegate :content_tag, :current_user, :params, :links, :html_safe, :h, :session, :l, :localize, :t, :status_tag, :link_to_if, :button_to,
     :can?, :link_to, :class, :session, to: :@view
 
   attr_accessor :exceptions

@@ -23,7 +23,10 @@ getGeoLocation = ->
 
 setGeoCookie = (position) ->
   cookie_val = position.coords.latitude + '|' + position.coords.longitude
-  document.cookie = 'lat_lng=' + escape(cookie_val)
+  date = new Date
+  date.setTime date.getTime() + 1 * 6 * 60 * 60 * 1000
+  expires = '; expires=' + date.toGMTString()
+  document.cookie = 'lat_lng' + escape(cookie_val) + expires
   console.log cookie_val
   return
 
