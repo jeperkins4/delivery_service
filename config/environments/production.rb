@@ -39,8 +39,8 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Action Cable endpoint configuration
-  # config.action_cable.url = 'wss://example.com/cable'
-  # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
+  config.action_cable.url = 'wss://example.com/cable'
+  config.action_cable.allowed_request_origins = [ 'http://doorstepdelivery.herokuapp.com', /http:\/\/doorstepdelivery.herokuapp.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -64,8 +64,8 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
-  # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "doorstep_#{Rails.env}"
+  config.active_job.queue_adapter     = :sidekiq
+  config.active_job.queue_name_prefix = "doorstep_#{Rails.env}"
   config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = { :host => Rails.application.secrets.domain_name }
 
