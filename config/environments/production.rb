@@ -39,7 +39,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Action Cable endpoint configuration
-  config.action_cable.url = 'wss://example.com/cable'
+  config.action_cable.url = 'wss://doorstepdelivery.herokuapp.com/cable'
   config.action_cable.allowed_request_origins = [ 'http://doorstepdelivery.herokuapp.com', /http:\/\/doorstepdelivery.herokuapp.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
