@@ -42,8 +42,7 @@ Rails.application.configure do
   config.action_cable.url = 'wss://doorstepdelivery.herokuapp.com/cable'
   config.action_cable.allowed_request_origins = [ 'http://doorstepdelivery.herokuapp.com', /http:\/\/doorstepdelivery.herokuapp.*/ ]
 
-  config.middleware.use ActionCableWebsocket
-  config.web_socket_server_url = 'wss://doorstepdelivery.herokuapp.com/'
+  #config.middleware.use ActionCableWebsocket
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
