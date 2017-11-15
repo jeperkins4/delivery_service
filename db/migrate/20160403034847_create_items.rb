@@ -4,7 +4,7 @@ class CreateItems < ActiveRecord::Migration[5.0]
       t.references :menu, foreign_key: true
       t.string :name
       t.string :description
-      t.money :price
+      t.monetize :price
 
       t.timestamps
     end

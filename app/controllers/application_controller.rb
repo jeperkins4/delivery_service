@@ -6,16 +6,16 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   helper_method :current_franchise, :current_location
-  before_filter :cors_preflight_check
-  after_filter :cors_set_access_control_headers
+  before_action :cors_preflight_check
+  after_action :cors_set_access_control_headers
 
   autocomplete :place, :name
 
   expose(:franchises) { Franchise.order(:name) }
 
-  decent_configuration do
-    strategy DecentExposure::StrongParametersStrategy
-  end
+  #decent_configuration do
+  #  strategy DecentExposure::StrongParametersStrategy
+  #end
 
   def current_franchise
     return if cookies[:lat_lng].nil?

@@ -18,7 +18,7 @@ development:
   encoding: unicode
   database: doorstep_development
   pool:     5
-  username: doorstep
+  username: jperkins
   password:
   template: template0
 
@@ -46,7 +46,7 @@ test:
   encoding: unicode
   database: doorstep_test
   pool:     5
-  username: doorstep
+  username: jperkins
   password:
   template: template0
 

@@ -1,5 +1,5 @@
 class PlacesController < ApplicationController
-  before_filter :authenticate_user!, exclude: [:index, :show]
+  before_action :authenticate_user!, exclude: [:index, :show]
   respond_to :html, :json
 
   expose(:places) { current_franchise.nil? ? Place.order(:name) : current_franchise.places.order(:name) }

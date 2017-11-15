@@ -22,9 +22,8 @@ ActiveRecord::Schema.define(version: 20160415131718) do
     t.string   "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_drivers_on_user_id", using: :btree
   end
-
-  add_index "drivers", ["user_id"], name: "index_drivers_on_user_id", using: :btree
 
   create_table "franchises", force: :cascade do |t|
     t.string   "name"
@@ -46,9 +45,8 @@ ActiveRecord::Schema.define(version: 20160415131718) do
     t.integer  "position"
     t.integer  "estimated_prep_time"
     t.integer  "actual_prep_time"
+    t.index ["menu_id"], name: "index_items_on_menu_id", using: :btree
   end
-
-  add_index "items", ["menu_id"], name: "index_items_on_menu_id", using: :btree
 
   create_table "menus", force: :cascade do |t|
     t.integer  "place_id"
@@ -59,9 +57,8 @@ ActiveRecord::Schema.define(version: 20160415131718) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.integer  "position"
+    t.index ["place_id"], name: "index_menus_on_place_id", using: :btree
   end
-
-  add_index "menus", ["place_id"], name: "index_menus_on_place_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
@@ -79,11 +76,10 @@ ActiveRecord::Schema.define(version: 20160415131718) do
     t.integer  "driver_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["driver_id"], name: "index_orders_on_driver_id", using: :btree
+    t.index ["place_id"], name: "index_orders_on_place_id", using: :btree
+    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
-
-  add_index "orders", ["driver_id"], name: "index_orders_on_driver_id", using: :btree
-  add_index "orders", ["place_id"], name: "index_orders_on_place_id", using: :btree
-  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "places", force: :cascade do |t|
     t.string   "name"
@@ -108,9 +104,8 @@ ActiveRecord::Schema.define(version: 20160415131718) do
     t.integer  "franchise_id"
     t.integer  "estimated_prep_time"
     t.integer  "actual_prep_time"
+    t.index ["franchise_id"], name: "index_places_on_franchise_id", using: :btree
   end
-
-  add_index "places", ["franchise_id"], name: "index_places_on_franchise_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -118,10 +113,9 @@ ActiveRecord::Schema.define(version: 20160415131718) do
     t.integer  "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+    t.index ["name"], name: "index_roles_on_name", using: :btree
   end
-
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
-  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -145,18 +139,16 @@ ActiveRecord::Schema.define(version: 20160415131718) do
     t.decimal  "latitude"
     t.decimal  "longitude"
     t.integer  "franchise_id"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["franchise_id"], name: "index_users_on_franchise_id", using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["franchise_id"], name: "index_users_on_franchise_id", using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
   end
-
-  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
   add_foreign_key "drivers", "users"
   add_foreign_key "items", "menus"

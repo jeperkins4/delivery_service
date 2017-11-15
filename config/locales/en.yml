@@ -41,7 +41,7 @@ en:
       day: "%B %e, %Y"
       full_day: "%A, %B %d, %Y"
       report: '%m/%d/%Y'
-  home: "<i class='fa fa-car'></i> Doorstep Delivery"
+  home: "<i class='fa fa-car'></i> Time Traveler"
   new: "<i class='fa fa-plus-square'></i> New %{model_name}"
   edit: "<i class='fa fa-edit'></i> Edit"
   resend: "<i class='fa fa-envelope-o'></i> Resend Certificate"

@@ -1,5 +1,5 @@
 class FranchisesController < ApplicationController
-  before_filter :authenticate_user!, except: [:set_location]
+  before_action :authenticate_user!, except: [:set_location]
   respond_to :html, :json
 
   expose(:franchises) {  Franchise.all }

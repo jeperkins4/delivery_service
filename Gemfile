@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 ruby '2.3.0'
-gem 'rails', '>= 5.0.0.beta3', github: 'rails/rails' #'< 5.1'
+gem 'rails', '>= 5.1', github: 'rails/rails' #'< 5.1'
 gem 'sprockets'
 #gem 'sprockets-rails', github: "rails/sprocket-rails"
 # Use sqlite3 as the database for Active Record
@@ -16,6 +16,8 @@ gem 'coffee-rails', github: 'rails/coffee-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'momentjs-rails'
+
+gem 'rb-readline'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -62,6 +64,7 @@ gem 'decent_exposure', github: 'hashrocket/decent_exposure'
 gem 'devise', github: 'plataformatec/devise'
 gem 'factual-api'
 gem 'font-awesome-rails'
+gem 'forecast_io'
 gem 'figaro'
 gem 'underscore-rails'
 gem 'geocoder'
@@ -79,6 +82,7 @@ gem 'pg'
 gem 'puma'
 gem 'rolify'
 gem 'simple_form'
+gem 'slope_one'
 gem 'country_select'
 gem 'sendgrid'
 
@@ -99,7 +103,7 @@ group :development do
   gem 'guard-rspec'
   gem 'html2haml'
   gem 'hub', :require=>nil
-  gem 'quiet_assets'
+  #gem 'quiet_assets'
   gem 'rails_apps_pages'
   gem 'rails_apps_testing'
   gem 'rails_layout'
